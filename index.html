@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MathVoyage - 探索数学之美</title>
+
+    <script type="importmap">
+        {
+            "imports": {
+				"three": "./js/three.module.min.js"
+            }
+        }
+    </script>
+  <script type="module" crossorigin src="/index-BwfJO7oP.js"></script>
+  <link rel="modulepreload" crossorigin href="/rolldown-runtime-BRuBLNTn.js">
+  <link rel="modulepreload" crossorigin href="/modulepreload-polyfill-axk1WA_r.js">
+  <link rel="modulepreload" crossorigin href="/bundle-a-OlgzMGoL.js">
+  <link rel="stylesheet" crossorigin href="/assets/index-Cu0ReQFW.css">
+</head>
+<body>
+<canvas id="bg-canvas"></canvas>
+
+<nav class="nav" id="navbar">
+    <a href="#" class="nav-logo">
+        <div class="logo-icon"></div>
+        MathVoyage
+    </a>
+    <ul class="nav-links" id="navLinks">
+        <li><a href="#news">新闻</a></li>
+        <li><a href="#about">关于</a></li>
+        <li>
+            <a href="#search" class="nav-icon" title="搜索">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                </svg>
+            </a>
+        </li>
+        <li>
+            <a href="./notes.html" class="nav-icon" title="登录">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+                </svg>
+            </a>
+        </li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="菜单">
+        <span></span><span></span><span></span>
+    </button>
+</nav>
+
+<section class="hero-3d" id="hero-3d">
+    <div class="hero-overlay">
+        <div class="hero-badge">
+            <span class="dot"></span> 拖拽物体水平旋转
+        </div>
+        <h1>3D视觉下的学习笔记</h1>
+        <p> </p>
+    </div>
+    <div class="scroll-indicator">
+        <svg viewBox="0 0 24 24">
+            <polyline points="6 9 12 15 18 9"/>
+        </svg>
+    </div>
+</section>
+
+<section class="section" id="features">
+    <div class="section-header">
+        <h2>为什么选择 MathVoyage？</h2>
+        <p class="subtitle">重新定义数学学习的体验</p>
+    </div>
+    <div class="features-grid">
+        <a class="feature-card" href="#">
+            <div class="card-icon ci-cyan">🔮</div>
+            <h3>互动式可视化</h3>
+            <p>动态几何模型让抽象触手可及。</p>
+        </a>
+        <a class="feature-card" href="#">
+            <div class="card-icon ci-blue">🧩</div>
+            <h3>故事化学习路径</h3>
+            <p>像读小说一样学习数学。</p>
+        </a>
+        <a class="feature-card" href="#">
+            <div class="card-icon ci-cyan">⚡</div>
+            <h3>即时反馈练习</h3>
+            <p>实时反馈掌握核心概念。</p>
+        </a>
+    </div>
+</section>
+
+<section class="section" id="courses">
+    <div class="section-header">
+        <h2>精选互动课程</h2>
+        <p class="subtitle">每一步都有精彩发现</p>
+    </div>
+    <div class="courses-grid">
+        <a class="course-card" href="#">
+            <div class="card-visual" style="background: linear-gradient(135deg, #0d2137 0%, #0a1422 100%);">📐</div>
+            <div class="card-body">
+                <h3>欧几里得几何</h3>
+                <p>亲手构建几何世界。</p>
+            </div>
+        </a>
+        <a class="course-card" href="#">
+            <div class="card-visual" style="background: linear-gradient(135deg, #0d2137 0%, #0a1422 100%);">📈</div>
+            <div class="card-body">
+                <h3>微积分入门</h3>
+                <p>动态极限直观理解。</p>
+            </div>
+        </a>
+    </div>
+</section>
+
+<footer class="footer">
+    <p>© 2026 MathVoyage · 通透青蓝科技风</p>
+</footer>
+
+<div id="svgTooltip" class="svg-tooltip"></div>
+
+
+<!-- 背景粒子与导航栏交互 -->
+<script>
+    (function() {
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+        let width, height, particles = [];
+        function resize() { width = canvas.width = window.innerWidth; height = canvas.height = window.innerHeight; }
+        resize();
+        window.addEventListener('resize', resize);
+        class Particle {
+            constructor() { this.reset(); }
+            reset() {
+                this.x = Math.random()*width; this.y = Math.random()*height;
+                this.vx = (Math.random()-0.5)*0.3; this.vy = (Math.random()-0.5)*0.3;
+                this.radius = Math.random()*1.8+0.5; this.alpha = Math.random()*0.35+0.1;
+            }
+            update() { this.x+=this.vx; this.y+=this.vy; if(this.x<-20)this.x=width+20; if(this.x>width+20)this.x=-20; if(this.y<-20)this.y=height+20; if(this.y>height+20)this.y=-20; }
+            draw(ctx) { ctx.beginPath(); ctx.arc(this.x,this.y,this.radius,0,Math.PI*2); ctx.fillStyle=`hsla(190,90%,70%,${this.alpha})`; ctx.fill(); }
+        }
+        function init() { particles=[]; for(let i=0;i<80;i++) particles.push(new Particle()); }
+        init();
+        function anim() { ctx.clearRect(0,0,width,height); particles.forEach(p=>{p.update();p.draw(ctx);}); requestAnimationFrame(anim); }
+        anim();
+    })();
+    const navbar = document.getElementById('navbar');
+    const navToggle = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+    window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 60));
+    navToggle.addEventListener('click', () => navLinks.classList.toggle('active'));
+    navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', () => navLinks.classList.remove('active')));
+</script>
+</body>
+</html>

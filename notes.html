@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>通鉴·智识 — 高中物理碰撞模型学习笔记</title>
+
+	<!-- Import Map for Three.js -->
+
+
+	<!-- 独立 CSS -->
+	<script type="importmap">
+		{
+			"imports": {
+				"three": "./js/three.module.min.js"
+			}
+		}
+	</script>
+  <script type="module" crossorigin src="/notes-yPd58uCa.js"></script>
+  <link rel="modulepreload" crossorigin href="/modulepreload-polyfill-axk1WA_r.js">
+  <link rel="modulepreload" crossorigin href="/rolldown-runtime-BRuBLNTn.js">
+  <link rel="modulepreload" crossorigin href="/bundle-a-OlgzMGoL.js">
+  <link rel="modulepreload" crossorigin href="/bundle-b-tBJWx1FG.js">
+  <link rel="stylesheet" crossorigin href="/assets/notes-DeBS3nEj.css">
+</head>
+<body>
+<div class="app">
+	<header class="app-header">
+		<div class="header-left">
+			<div class="logo-wrapper">
+				<span class="logo-icon" id="dynamicHeaderIcon"></span>
+				<span class="logo-text" id="dynamicHeaderTitle">通鉴·智识</span>
+				<span class="badge">Pro</span>
+			</div>
+		</div>
+		<div class="header-search">
+			<div class="search-container">
+				<input type="text" placeholder="搜典籍、官职、人物……" value="列侯之国">
+				<button class="search-btn"><span>🔍</span> 检索</button>
+			</div>
+		</div>
+	</header>
+
+	<div class="main-layout">
+		<div class="outline-sidebar">
+			<div class="outline-nav" id="outlineNavContainer"></div>
+			<div class="outline-footer" id="userProfileContainer"></div>
+		</div>
+
+		<div class="content-pane" id="scrollContainer">
+			<div class="article-row">
+				<div class="article-main" id="articleMainContainer"></div>
+				<div class="recommend-column" id="recommendColumn"></div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- 全屏浮层 -->
+<div class="canvas-fullscreen-overlay" id="fullscreenOverlay">
+	<div class="fullscreen-canvas-wrapper" id="fullscreenWrapper"></div>
+<!--	<button class="close-fullscreen-btn" id="closeFullscreenBtn">✕</button>-->
+	<div class="nav-btn nav-btn-left" id="prevModelBtn" title="上一页">←</div>
+	<div class="nav-btn nav-btn-right" id="nextModelBtn" title="下一页">→</div>
+</div>
+
+<!-- 链接提示浮层 -->
+<div id="link-tooltip"></div>
+
+<!-- 主入口模块 -->
+<!--<script>window.pageDataModule = './data.js';</script>-->
+<!--<script type="module" src="./js/data.js"></script>-->
+</body>
+</html>
